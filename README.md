@@ -4,10 +4,27 @@
 
 ```sh
 
+# install HomeBrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# ====================
+# ====== tmux ========
+# ====================
+brew install tmux
+
+# tmux plug manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+mv ~/.tmux.conf ~/.tmux.conf.backup
+ln -s zong_conf/tmux/tmux.conf ~/.tmux.conf
+mv ~/.tmux.conf.local ~/.tmux.conf.backup.local
+ln -s zong_conf/tmux/tmux.conf.local ~/.tmux.conf.local
+
 # ====================
 # ====== zsh =========
 # ====================
 
+# oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 mv ~/.zshrc ~/.zshrc.backup
@@ -28,36 +45,12 @@ git clone https://github.com/paulirish/git-open.git ${ZSH_CUSTOM:-~/.oh-my-zsh/c
 # autojump
 brew install autojump
 
-
-# install HomeBrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
 # ====================
 # ==== neofetch ======
 # ====================
+# A command-line system information tool
 brew install neofetch
 
-# ====================
-# ====== tmux ========
-# ====================
-brew install tmux
-
-mv ~/.tmux.conf ~/.tmux.conf.backup
-ln -s zong_conf/tmux/tmux.conf ~/.tmux.conf
-mv ~/.tmux.conf.local ~/.tmux.conf.backup.local
-ln -s zong_conf/tmux/tmux.conf.local ~/.tmux.conf.local
-
-
-# tmux plug manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# ====================
-# ==== alacritty =====
-# ====================
-brew install alacritty
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
-ln -s  -v ~/zong_conf/alacritty  ~/.config
 
 # ====================
 # ====== neovim ======
@@ -67,7 +60,9 @@ brew install neovim
 ln -s  -v ~/zong_conf/nvim  ~/.config/nvim
 ln -s  -v ~/zong_conf/vim/vimrc ~/.vimrc
 
+# neovim plug requried
 pip3 install neovim
+brew install node
 
 # install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -76,11 +71,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # PlugInstall & CocInstall
 nvim -c 'PlugInstall | CocInstall -sync coc-json coc-html coc-go coc-sql coc-vimlsp coc-explorer coc-thrift-syntax-support coc-translator|q'
 
-
-# tmux-256 color not necessary
-# https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
-curl -LO https://invisible-island.net/datafiles/current/terminfo.src.gz && gunzip terminfo.src.gz
-/usr/bin/tic -xe tmux-256color terminfo.src
 
 # ====== ideavim ======
 ln -s -v ~/zong_conf/vim/ideavimrc ~/.ideavimrc
@@ -106,17 +96,40 @@ brew install jq
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 
+# ====================
+# ===== golang =======
+# ====================
 
-# ==================== cask
+brew install go
+
+
+# dlv
+# a debugger for the Go programming language 
+go install github.com/go-delve/delve/cmd/dlv@latest
+
+
+#******************************  
+			cask
+
+# ====================
+# ==== alacritty =====
+# ====================
+brew install alacritty
+brew tap homebrew/cask-fonts
+brew install --cask font-hack-nerd-font
+ln -s  -v ~/zong_conf/alacritty  ~/.config
 
 # ====================
 # ==== stretchly =====
 # ====================
+# 定时休息提醒app
+
 brew install --cask stretchly
 
 # ====================
 # ====== stats =======
 # ====================
+# 系统状态监控app
 brew install --cask stats
 ```
 
